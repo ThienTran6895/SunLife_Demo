@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model IEnumerable<SunLife.Web.Models.Customer>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách file</h6>
+    </div>
+    <div class="card-header py-3">
+        <a class="btn btn-primary" href="/home/InsuranceInfo">Thêm</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-with-bg" id="grid">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Bên mua bảo hiểm</th>
+                        <th>Ngày tạo</th>
+                        <th>Người tạo</th>
+                        <th style="width:60px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td></td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.CreateDate
+                                </td>
+                                <td>Người tạo</td>
+                                <td>
+                                    <a href="/home/InsuranceInfo?id=@item.CustomerID" class="btn btn-link">Xem</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+    });
+
+</script>

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "ListUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Ngươi dùng</h6>
+    </div>
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-sm-3">
+                <input id="search_txt" type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-info">Tìm</button>
+            </div>
+            <div class="col-sm-7" style="text-align:right;">
+                <a href="/account/register" class="btn btn-primary">Thêm</a>
+            </div>
+            </div>
+    </div>
+    <div class="card-header py-3">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Created Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
