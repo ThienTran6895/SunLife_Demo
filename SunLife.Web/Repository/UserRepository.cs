@@ -11,14 +11,15 @@ namespace SunLife.Web.Repository
 {
     public class UserRepository
     {
-        public IEnumerable<User> GetAllUser(string UserName, string Email, DateTime LockoutEndDateUtc)
+        public IEnumerable<User> GetAllUser(string Id, string UserName, string Email, DateTime CreateDate)
         {
             try
             {
                 var param = new DynamicParameters();
+                param.Add("@Id", Id, DbType.String);
                 param.Add("@UserName", UserName, DbType.String);
-                if (LockoutEndDateUtc != DateTime.MinValue)
-                    param.Add("@LockoutEndDateUtc", LockoutEndDateUtc, DbType.DateTime);
+                if (CreateDate != DateTime.MinValue)
+                    param.Add("@CreateDate", CreateDate, DbType.DateTime);
                 param.Add("@Email", Email, DbType.String);
                 var enumResult = DapperHelper.Query<User>("insurance_GetAllUser", "admin", param);
                 return enumResult;

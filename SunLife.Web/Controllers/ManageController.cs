@@ -257,7 +257,7 @@ namespace SunLife.Web.Controllers
         //sondt
         public ActionResult ListUsers(User user)
         {
-            var result = userRepository.GetAllUser(UserName: user.UserName, Email: user.Email, LockoutEndDateUtc: user.LockoutEndDateUtc);
+            var result = userRepository.GetAllUser(Id: user.Id, UserName: user.UserName, Email: user.Email, CreateDate: user.CreateDate);
             return View(result);
         }
         

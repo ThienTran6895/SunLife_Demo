@@ -14,12 +14,12 @@
                 <input id="search_txt" type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
             </div>
             <div class="col-sm-2">
-                <button type="button" class="btn btn-info">Tìm</button>
+                <button id="search_btn" type="button" class="btn btn-info">Tìm</button>
             </div>
             <div class="col-sm-7" style="text-align:right;">
                 <a href="/account/register" class="btn btn-primary">Thêm</a>
             </div>
-            </div>
+        </div>
     </div>
     <div class="card-header py-3">
         <div class="card-body">
@@ -30,12 +30,40 @@
                             <th>Username</th>
                             <th>Email</th>
                             <th>Created Date</th>
-                            <th></th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th id="FileName">@item.UserName</th>
+                                    <th>@item.Email</th>
+                                    <th>@item.CreateDate</th>
+                                </tr>
+                            }
+                        }
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Search
+            $("#search_btn").on("click", function () {
+                var name = {
+                    UserName: $("#search_txt").val()
+                }
+                $.ajax({
+                type: "POST",
+                    dataType: "json",
+                    data: name,
+                    url: '@Url.Action("ListUsers", "Manage")',
+                });
+                window.location.href = '@Url.Action("ListUsers", "Manage")?UserName=' + name.UserName;
+            });
+    });
+</script>

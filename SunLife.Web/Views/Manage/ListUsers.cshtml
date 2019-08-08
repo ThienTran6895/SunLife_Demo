@@ -30,6 +30,7 @@
                             <th>Username</th>
                             <th>Email</th>
                             <th>Created Date</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +40,10 @@
                                 <tr>
                                     <th id="FileName">@item.UserName</th>
                                     <th>@item.Email</th>
-                                    <th>@item.LockoutEndDateUtc</th>
+                                    <th>@item.CreateDate</th>
+                                    <th style="text-align:center;">
+                                        <a href="/Account/ResetPassword?Id=@item.Id" class="btn btn-link">Reset Password</a>
+                                    </th>
                                 </tr>
                             }
                         }

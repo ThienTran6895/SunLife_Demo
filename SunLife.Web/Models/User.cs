@@ -19,5 +19,6 @@ namespace SunLife.Web.Models
         public int LockoutEnable { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SunLife.Web.Models;
@@ -75,7 +76,7 @@ namespace SunLife.Web.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -151,7 +152,8 @@ namespace SunLife.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, LockoutEndDateUtc = DateTime.Now.ToLocalTime() };
+                model.CreateDate = DateTime.Now;
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email, CreateDate = model.CreateDate.Date};                               
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -229,12 +231,22 @@ namespace SunLife.Web.Controllers
             return View();
         }
 
-        //
+
+        //thientc
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public async Task<ActionResult> ResetPassword(string id)
         {
-            return code == null ? View("Error") : View();
+            ApplicationDbContext context = new ApplicationDbContext();
+            UserStore<ApplicationUser> store = new UserStore<ApplicationUser>(context);
+            UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(store);
+            String userId = id;
+            String newPassword = "Test@123"; 
+            String hashedNewPassword = UserManager.PasswordHasher.HashPassword(newPassword);
+            ApplicationUser cUser = await store.FindByIdAsync(userId);
+            await store.SetPasswordHashAsync(cUser, hashedNewPassword);
+            await store.UpdateAsync(cUser);
+            return RedirectToAction("Index","Home");                
         }
 
         //

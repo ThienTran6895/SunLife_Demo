@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SunLife.Web.Models
@@ -8,6 +9,7 @@ namespace SunLife.Web.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+       
     }
 
     public class ExternalLoginListViewModel
@@ -47,11 +49,11 @@ namespace SunLife.Web.Models
     }
 
     public class LoginViewModel
-    {
+    {        
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "UserName")]      
+        public string UserName { get; set; }
+
 
         [Required]
         [DataType(DataType.Password)]
@@ -83,6 +85,8 @@ namespace SunLife.Web.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public DateTime CreateDate { get; set; }
     }
 
     public class ResetPasswordViewModel
