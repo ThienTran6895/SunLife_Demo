@@ -2,104 +2,106 @@
     ViewBag.Title = "Tables";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <!-- Page Heading -->
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Danh sách file</h6>
-        </div>
-        <div class="card-header py-3">
-            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div class="input-group">
-                    <input id="search_txt" type="text" class="form-control col-md-3 bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" id="search_btn">
-                            <i class="fas fa-search fa-sm"></i>
-                        </button>
-                    </div>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" aria-pressed="false" autocomplete="off" data-target="#Upload" style="margin-left: 900px;">
-                        Thêm
+<!-- Page Heading -->
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách file</h6>
+    </div>
+    <div class="card-header py-3">
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input id="search_txt" type="text" class="form-control col-md-3 bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="search_btn">
+                        <i class="fas fa-search fa-sm"></i>
                     </button>
                 </div>
-            </form>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>FileName</th>
-                            <th>Type</th>
-                            <th>Upload Date</th>
-                            <th>Upload Person</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{
-                            foreach (var item in Model)
-                            {
-                                <tr>
-                                    <th id="FileName">@item.FileName</th>
-                                    <th></th>
-                                    <th>@item.UploadDate</th>
-                                    <th></th>
-                                    <th>
-                                        <div class="dropdown">
-                                            <button id="action" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                -- Chọn thao tác --
-                                                <span class="caret"></span>
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="action">
-                                                <a class="dropdown-item" href="#">Download</a>
-                                                <a class="dropdown-item" href="#" id="delete_btn">Delete</a>
-                                            </div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" aria-pressed="false" autocomplete="off" data-target="#Upload" style="margin-left: 600px;">
+                    Thêm
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>FileName</th>
+                        <th>Type</th>
+                        <th>Upload Date</th>
+                        <th>Upload Person</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <th id="FileName">@item.FileName</th>
+                                <th>              
+                                    <div class="image-file" style="background-image:url(/Content/Images/@item.Type.png)"></div>
+                                </th>
+                                <th>@item.UploadDate</th>
+                                <th></th>
+                                <th>
+                                    <div class="dropdown">
+                                        <button id="action" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            -- Chọn thao tác --
+                                            <span class="caret"></span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="action">
+                                            <a class="dropdown-item" href="#">Download</a>
+                                            <a class="dropdown-item" href="#" id="delete_btn">Delete</a>
                                         </div>
-                                    </th>
-                                </tr>
+                                    </div>
+                                </th>
+                            </tr>
                             }
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-
-    @* Modal Upload File *@
-    <div class="modal fade" id="Upload" tabindex="-1" role="dialog" aria-labelledby="FileInfo">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="FileInfo">Upload File</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-                </div>
-                <div class="modal-body">
-                    <form id="uploader">
-                        <div class="form-group">
-                            <label for="file-name" class="control-label">Tên File:</label>
-                            <input type="file" class="form-control" id="file-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="upload-date" class="control-label">Ngày Upload:</label>
-                            <input type="date" class="form-control" id="upload-date" />
-                        </div>
-                        <div class="form-group">
-                            <label for="upload-person" class="control-label">Người Upload:</label>
-                            <input type="text" class="form-control" id="upload-person" />
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal" id="submit">Xác nhận</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
+                }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script type="text/javascript">
+
+        @* Modal Upload File *@
+        <div class="modal fade" id="Upload" tabindex="-1" role="dialog" aria-labelledby="FileInfo">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="FileInfo">Upload File</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form id="uploader">
+                            <div class="form-group">
+                                <label for="file-name" class="control-label">Tên File:</label>
+                                <input type="file" class="form-control" id="file-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="upload-date" class="control-label">Ngày Upload:</label>
+                                <input type="date" class="form-control" id="upload-date" />
+                            </div>
+                            <div class="form-group">
+                                <label for="upload-person" class="control-label">Người Upload:</label>
+                                <input type="text" class="form-control" id="upload-person" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="submit">Xác nhận</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Huỷ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
         $(document).ready(function () {
             $.noConflict();
             var table = $("dataTable").DataTable();
@@ -118,7 +120,7 @@
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         window.location.href = '@Url.Action("Index","Tables")';
                     }
-                }                
+                }
             });
 
 
@@ -151,7 +153,23 @@
                 window.location.href = '@Url.Action("Index", "Tables")?DeleteFile=' + name.FileName;
             });
         });
-    </script>
+        </script>
+
+        <style type="text/css">
+            .image-file {
+                display: inline-block;
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background-size: 48px 51px;
+                background-position: center center;
+                vertical-align: middle;
+                line-height: 32px;
+                box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
+                margin-left: 5px;
+            }
+        </style>
+
 
 
 

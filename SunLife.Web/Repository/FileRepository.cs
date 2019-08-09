@@ -23,6 +23,7 @@ namespace SunLife.Web.Repository
 
                 param.Add("@FileName", file.FileName, DbType.String);
                 param.Add("@UploadPerson", file.UploadPerson, DbType.String);
+                param.Add("@Type", file.Type, DbType.String);
                 var enumResult = DapperHelper.Execute("insurance_AddFile", "admin", param);
 
                 return enumResult;
@@ -34,7 +35,7 @@ namespace SunLife.Web.Repository
             }
         }
 
-        public IEnumerable<SunLifeFileModels> GetAllFile(string FileName, DateTime UploadDate)
+        public IEnumerable<SunLifeFileModels> GetAllFile(string FileName, DateTime UploadDate, string Type)
         {
             try
             {
@@ -42,7 +43,7 @@ namespace SunLife.Web.Repository
                 param.Add("@FileName", FileName, DbType.String);
                 if (UploadDate != DateTime.MinValue)
                     param.Add("@UploadDate", UploadDate, DbType.DateTime);
-
+                param.Add("@Type", Type, DbType.String);
                 var enumResult = DapperHelper.Query<SunLifeFileModels>("insurance_GetAllFile", "admin", param);
                 return enumResult;
             }

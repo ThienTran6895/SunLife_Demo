@@ -11,6 +11,6 @@ namespace SunLife.Web.Models
         public string FileName { get; set; }
         public DateTime UploadDate { get; set; }
         public string UploadPerson { get; set; }
-        
+        public string Type { get; set; }
     }
 }

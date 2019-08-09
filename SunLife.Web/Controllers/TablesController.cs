@@ -16,7 +16,7 @@ namespace SunLife.Web.Controllers
         // GET: Tables
         public ActionResult Index(SunLifeFileModels file)
         {
-            var data = fileRepository.GetAllFile(FileName: file.FileName, UploadDate: file.UploadDate);
+            var data = fileRepository.GetAllFile(FileName: file.FileName, UploadDate: file.UploadDate, Type: file.Type);
             return View(data);
         }
 
@@ -32,16 +32,23 @@ namespace SunLife.Web.Controllers
         {
             for (int i = 0; i < Request.Files.Count; i++)
             {
-                HttpPostedFileBase file = Request.Files[i]; //Uploaded file
-                //Use the following properties to get file's name, size and MIMEType
-                //var fileupload = Request.Files[i];   
+                HttpPostedFileBase file = Request.Files[i]; //Uploaded file                             
                 //files.FileID = Guid.NewGuid();
                 files.FileName = file.FileName;
                 //files.UploadDate = DateTime.Now.ToLocalTime();
                 files.UploadPerson = "Admin";
+                string str = System.IO.Path.GetExtension("~/UploadFiles/" + files.FileName).ToLowerInvariant();
+                string[] type = str.Split('.');
+                foreach (string item in type)
+                {
+                    if (item.Trim() != "")
+                    {
+                        files.Type = item;
+                    }
+                }
                 //int fileSize = file.ContentLength;
                 //string fileName = file.FileName;
-                //string mimeType = file.ContentType;
+                //string mimeType = file.ContentType;            
                 //System.IO.Stream fileContent = file.InputStream;
                 //To save file, use SaveAs method
                 file.SaveAs(Server.MapPath("~/UploadFiles/") + files.FileName); //File will be saved in application root

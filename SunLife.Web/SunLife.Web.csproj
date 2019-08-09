@@ -223,6 +223,21 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\docx.png" />
+    <Content Include="Content\Images\excel.png" />
+    <Content Include="Content\Images\pdf.png" />
+    <Content Include="Content\Images\ppt.png" />
+    <Content Include="Content\Images\t.doc.png" />
+    <Content Include="Content\Images\t.docx.png" />
+    <Content Include="Content\Images\t.html.png" />
+    <Content Include="Content\Images\t.pdf.png" />
+    <Content Include="Content\Images\t.png" />
+    <Content Include="Content\Images\t.ppt.png" />
+    <Content Include="Content\Images\t.pptx.png" />
+    <Content Include="Content\Images\t.txt.png" />
+    <Content Include="Content\Images\t.xls.png" />
+    <Content Include="Content\Images\t.xlsx.png" />
+    <Content Include="Content\Images\t.xml.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
